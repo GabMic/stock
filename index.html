@@ -1,101 +1,206 @@
 <!DOCTYPE html>
-<html lang="he">
+<html lang="en" dir="rtl">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>כרטיסי פלאש אהבה</title>
-  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+  <title>Stock Tracker - RTL</title>
   <style>
     body {
-      font-family: 'Assistant', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
+      font-family: Arial, sans-serif;
       margin: 0;
-      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
-      direction: rtl;
+      padding: 20px;
+      direction: rtl; /* Right-to-Left layout */
+      text-align: right;
+      background-color: #f9f9f9;
     }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 20px;
-      width: 90%;
-      max-width: 800px;
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
     }
 
-    .card {
-      perspective: 1000px;
+    .header {
+      text-align: right;
+      margin-bottom: 20px;
     }
 
-    .card-inner {
-      position: relative;
-      width: 100%;
-      height: 200px;
-      text-align: center;
-      transition: transform 0.6s;
-      transform-style: preserve-3d;
-      cursor: pointer;
-    }
-
-    .card:hover .card-inner {
-      transform: rotateY(180deg);
-    }
-
-    .card-front, .card-back {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      backface-visibility: hidden;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .card-front {
-      background: #fff;
+    .header h1 {
+      font-size: 24px;
+      margin: 0;
       color: #333;
-      font-size: 1.2em;
-      font-weight: bold;
     }
 
-    .card-back {
-      background: #ff6f61;
-      color: #fff;
-      transform: rotateY(180deg);
+    .header p {
+      color: #555;
+      font-size: 14px;
+    }
+
+    .row-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .row-card div {
+      margin-bottom: 10px;
+    }
+
+    .row-card label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+      color: #333;
+    }
+
+    .row-card input[type="text"],
+    .row-card select,
+    .row-card input[type="number"] {
+      width: 100%;
       padding: 10px;
-      font-size: 1.1em;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      font-size: 14px;
+      text-align: right;
+    }
+
+    .row-card select {
+      background-color: #f9f9f9;
+    }
+
+    .add-button {
+      margin-top: 20px;
+      padding: 12px 20px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      width: 100%;
+    }
+
+    .add-button:hover {
+      background-color: #0056b3;
+    }
+
+    /* Dropdown options with background colors */
+    option.red {
+      background-color: #f26868;
+    }
+
+    option.green {
+      background-color: #08ab08;
+    }
+
+    option.blue {
+      background-color: #ccccff;
+    }
+
+    option.yellow {
+      background: linear-gradient(90deg, rgba(131,58,180,1) 0%, rgba(253,29,29,1) 24%, rgba(252,176,69,1) 71%);
+    }
+
+    option.brown-carton {
+      background-color: #6b4d04;
+    }
+
+    option.brown {
+      background-color: saddlebrown;
+    }
+
+    /* Mobile adjustments */
+    @media (max-width: 600px) {
+      .row-card {
+        padding: 15px;
+        margin-bottom: 20px;
+      }
+
+      .add-button {
+        font-size: 14px;
+        padding: 14px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>כרטיסי פלאש אהבה ❤️</h1>
-  <div class="grid">
-    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
-      <div class="card-inner">
-        <div class="card-front">כרטיס 1</div>
-        <div class="card-back">אני אוהב את החיוך שלך!</div>
+<div class="container">
+  <div class="header">
+    <h1>ניהול מלאי</h1>
+    <p>עקוב אחר מלאי הפריטים שלך לפי צבע, כמות ותיאור.</p>
+  </div>
+
+  <div id="rows-container">
+    <!-- Example Row -->
+    <div class="row-card">
+      <div>
+        <label>תיאור פריט</label>
+        <input type="text" placeholder="לדוגמה: בצל" />
       </div>
-    </div>
-    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
-      <div class="card-inner">
-        <div class="card-front">כרטיס 2</div>
-        <div class="card-back">את השמש שלי!</div>
+      <div>
+        <label>צבע/סוג</label>
+        <select>
+          <option value="" disabled selected>בחר צבע</option>
+          <option class="red">אדום</option>
+          <option class="green">ירוק</option>
+          <option class="yellow">צבעוני</option>
+          <option class="blue">כחול</option>
+          <option class="brown">שופרסל</option>
+          <option class="brown-carton">קרטון</option>
+        </select>
       </div>
-    </div>
-    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
-      <div class="card-inner">
-        <div class="card-front">כרטיס 3</div>
-        <div class="card-back">תודה שאת את!</div>
+      <div>
+        <label>כמות</label>
+        <input type="number"  placeholder="כמות" />
+      </div>
+      <div>
+        <label>הערות</label>
+        <input type="text" placeholder="הערות (אופציונלי)" />
       </div>
     </div>
   </div>
-  <script>
-    // No additional JS is needed, animation and click are CSS-based!
-  </script>
+
+  <button class="add-button" onclick="addRow()">הוסף שורה</button>
+</div>
+
+<script>
+  function addRow() {
+    const rowsContainer = document.getElementById('rows-container');
+
+    const newRow = document.createElement('div');
+    newRow.classList.add('row-card');
+
+    newRow.innerHTML = `
+        <div>
+          <label>תיאור פריט</label>
+          <input type="text" placeholder="לדוגמה: בצל" />
+        </div>
+        <div>
+          <label>צבע/סוג</label>
+          <select>
+            <option value="" disabled selected>בחר צבע</option>
+            <option class="red">אדום</option>
+            <option class="blue">כחול</option>
+            <option class="green">ירוק</option>
+            <option class="yellow">צבעוני</option>
+            <option class="brown">שופרסל</option>
+            <option class="brown-carton">קרטון</option>
+          </select>
+        </div>
+        <div>
+          <label>כמות</label>
+          <input type="number" min="1" placeholder="כמות" />
+        </div>
+        <div>
+          <label>הערות</label>
+          <input type="text" placeholder="הערות (אופציונלי)" />
+        </div>
+      `;
+
+    rowsContainer.appendChild(newRow);
+  }
+</script>
 </body>
 </html>
