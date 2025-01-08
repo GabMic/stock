@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>כרטיסי פלאש אהבה</title>
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Assistant', sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      background: linear-gradient(to bottom right, #ff9a9e, #fad0c4);
+      direction: rtl;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 20px;
+      width: 90%;
+      max-width: 800px;
+    }
+
+    .card {
+      perspective: 1000px;
+    }
+
+    .card-inner {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      text-align: center;
+      transition: transform 0.6s;
+      transform-style: preserve-3d;
+      cursor: pointer;
+    }
+
+    .card:hover .card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .card-front, .card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      backface-visibility: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-front {
+      background: #fff;
+      color: #333;
+      font-size: 1.2em;
+      font-weight: bold;
+    }
+
+    .card-back {
+      background: #ff6f61;
+      color: #fff;
+      transform: rotateY(180deg);
+      padding: 10px;
+      font-size: 1.1em;
+    }
+  </style>
+</head>
+<body>
+  <h1>כרטיסי פלאש אהבה ❤️</h1>
+  <div class="grid">
+    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">כרטיס 1</div>
+        <div class="card-back">אני אוהב את החיוך שלך!</div>
+      </div>
+    </div>
+    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">כרטיס 2</div>
+        <div class="card-back">את השמש שלי!</div>
+      </div>
+    </div>
+    <div class="card" onclick="this.querySelector('.card-inner').classList.toggle('flipped')">
+      <div class="card-inner">
+        <div class="card-front">כרטיס 3</div>
+        <div class="card-back">תודה שאת את!</div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // No additional JS is needed, animation and click are CSS-based!
+  </script>
+</body>
+</html>
